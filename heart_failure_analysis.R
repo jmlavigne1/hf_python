@@ -39,6 +39,18 @@ smoking_plates_box
 sc_hist <- ggplot(heart, aes(heart$serum_creatinine)) + geom_histogram() +ggtitle("Serum Creatinine Histogram")
 sc_hist
 
+ss_hist <- ggplot(heart, aes(heart$serum_sodium)) + geom_histogram() + ggtitle("Serum Sodium Histogram") + labs(x='Serum Sodium')
+ss_hist
+
+ss_quant_25 <- quantile(heart$serum_sodium, 0.25)
+print(ss_quant_25)
+ss_quant_50 <- quantile(heart$serum_sodium, 0.50)
+print(ss_quant_50)
+ss_quant_75 <- quantile(heart$serum_sodium, 0.75)
+print(ss_quant_75)
 
 
+#Generating a Random Sample from the heart dataset
+
+sample(heart$serum_sodium,)
 
