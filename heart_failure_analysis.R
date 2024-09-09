@@ -9,6 +9,6 @@ print(head(heart))
 
 #EDA pt. 1 for heart dataset: descriptive statistics
 View(summary(heart))
-
-
-
+print(mean(heart$age))
+print(IQR(heart$age))
+print(min(heart$age))
