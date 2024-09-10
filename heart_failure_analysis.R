@@ -50,7 +50,18 @@ ss_quant_75 <- quantile(heart$serum_sodium, 0.75)
 print(ss_quant_75)
 
 
-#Generating a Random Sample from the heart dataset
+#Generating a Random Sample of serum sodium values from the heart dataset
 
-sample(heart$serum_sodium,)
+ss_sample<- sample(heart$serum_sodium, 25)
+print(ss_sample)
+
+#Based on the size of the dataset, is it important to consider how many groups to divide the random sample sets into?
+
+ss_sample_hist <- hist(ss_sample)
+ss_sample_hist
+
+
+
+
+
 
