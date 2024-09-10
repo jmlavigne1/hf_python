@@ -61,7 +61,7 @@ ss_sample_hist <- hist(ss_sample)
 ss_sample_hist
 
 
+cp_p <- ggplot(heart, aes(heart$creatinine_phosphokinase, heart$platelets)) + geom_point()
 
-
-
+cp_p
 
