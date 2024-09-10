@@ -76,13 +76,13 @@ cp_p
 heights <- tapply(heart$creatinine_phosphokinase, heart$anaemia, mean)
 #heights <- as.data.frame(heights)
 
-barplot(heights, main=("CP vs anaemia status"), names.arg=c("Not Anaemic", "Anaemic"), col=c("red",'maroon'))
+barplot(heights, main=("CP (mean) vs anaemia status"), names.arg=c("Not Anaemic", "Anaemic"), col=c("red",'maroon'))
 
 # Function to set numbers with marks and without scientific notation
 marks_no_sci <- function(x) format(x, big.mark = ",", decimal.mark = ".", scientific = FALSE)
 
 labels <- c("Not Anaemic", "Anaemic")
-cp_anaemia <- ggplot(heart, aes(y=heart$creatinine_phosphokinase, x=heart$anaemia), mean()) + geom_bar(stat="identity", fill = "maroon") + labs(x="Anaemia Status", y="Creatinine Phosphokinase") + ggtitle("CP vs Anaemia Status") + scale_x_discrete(label=labels) + scale_y_continuous(labels = marks_no_sci) 
+cp_anaemia <- ggplot(heart, aes(y=heart$creatinine_phosphokinase, x=heart$anaemia), mean()) + geom_bar(stat="identity", fill = "maroon") + labs(x="Anaemia Status", y="Creatinine Phosphokinase") + ggtitle("CP (mean) vs Anaemia Status") + scale_x_discrete(label=labels) + scale_y_continuous(labels = marks_no_sci) 
 cp_anaemia
 
 heights_1 <- tapply(heart$platelets, heart$diabetes, mean)
@@ -98,6 +98,57 @@ barplot(heights_1, main=("Platelet Level in Diabetes Status"), names.arg=c("Not 
 non_anaemic <- heart%>%filter(anaemia ==FALSE)
 View(non_anaemic)
 
+non_anaemic_cp <- non_anaemic$creatinine_phosphokinase
+View(non_anaemic_cp)
 anaemic <- heart%>%filter(anaemia ==TRUE)
 View(anaemic)
+
+anaemic_cp <- anaemic$creatinine_phosphokinase
+View(anaemic_cp)
+
+
+
+
+#calculate the z-scores (normalize) the data for the cp in the non-anaemic and anaemic subsets
+
+scaled_nacp <- scale(non_anaemic$creatinine_phosphokinase)
+print(scaled_nacp)
+
+
+scaled_acp <- scale(anaemic$creatinine_phosphokinase)
+print(scaled_acp)
+
+#generate random samples from the populations
+
+non_a_sample <- sample(scaled_nacp,50)
+hist(non_a_sample)
+
+
+a_sample <- sample(scaled_acp,50)
+hist(a_sample)
+
+#test the mean of the samples with a t-Test
+
+
+t.test(anaemic_cp,mu=95)
+
+t.test(non_anaemic_cp, mu=95)
+
+
+
+
+
+
+
+
+heart_count <- heart%>%group_by(anaemia)%>%summarize(count=n())
+print(heart_count)
+
+cp_na <- non_anaemic$creatinine_phosphokinase
+print(cp_na)
+print(summary(cp_na))
+
+cp_a <- anaemic$creatinine_phosphokinase
+print(cp_a)
+print(summary(cp_a))
 
