@@ -136,11 +136,6 @@ t.test(non_anaemic_cp, mu=95)
 
 
 
-
-
-
-
-
 heart_count <- heart%>%group_by(anaemia)%>%summarize(count=n())
 print(heart_count)
 
