@@ -1,6 +1,7 @@
 library(readr)
 library(tidyverse)
 library(ggplot2)
+library(modelr)
 
 heart <- read_csv('heart_failure_clinical_records_dataset.csv')
 
@@ -13,6 +14,10 @@ print(mean(heart$age))
 print(IQR(heart$age))
 print(min(heart$age))
 
+
+#variance calculation
+
+View(var(heart))
 
 #EDA pt. 2 for heart dataset: dataset visualizations 
 
@@ -64,4 +69,35 @@ ss_sample_hist
 cp_p <- ggplot(heart, aes(heart$creatinine_phosphokinase, heart$platelets)) + geom_point()
 
 cp_p
+
+
+#generate barcharts for categorical variables
+
+heights <- tapply(heart$creatinine_phosphokinase, heart$anaemia, mean)
+#heights <- as.data.frame(heights)
+
+barplot(heights, main=("CP vs anaemia status"), names.arg=c("Not Anaemic", "Anaemic"), col=c("red",'maroon'))
+
+# Function to set numbers with marks and without scientific notation
+marks_no_sci <- function(x) format(x, big.mark = ",", decimal.mark = ".", scientific = FALSE)
+
+labels <- c("Not Anaemic", "Anaemic")
+cp_anaemia <- ggplot(heart, aes(y=heart$creatinine_phosphokinase, x=heart$anaemia), mean()) + geom_bar(stat="identity", fill = "maroon") + labs(x="Anaemia Status", y="Creatinine Phosphokinase") + ggtitle("CP vs Anaemia Status") + scale_x_discrete(label=labels) + scale_y_continuous(labels = marks_no_sci) 
+cp_anaemia
+
+heights_1 <- tapply(heart$platelets, heart$diabetes, mean)
+barplot(heights_1, main=("Platelet Level in Diabetes Status"), names.arg=c("Not Diabetic", "Diabetic"), col=c("darkgreen", "orange"))
+
+#evaluate if there is a significant difference in platelet levels between patients with diabetes and without diabetes. 
+
+
+##evaluate if there is a significant difference in creatinine phosphokinase and anaemia. 
+
+#First I will subset the data into anaemic and non-anaemic patients.
+
+non_anaemic <- heart%>%filter(anaemia ==FALSE)
+View(non_anaemic)
+
+anaemic <- heart%>%filter(anaemia ==TRUE)
+View(anaemic)
 
