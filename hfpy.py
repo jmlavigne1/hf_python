@@ -61,26 +61,41 @@ import seaborn as sns
 
 sns.pairplot(hfpy)
 
-
-
-
-
 ## a correlation heat map is also a useful tool
 
 #correlation heat map
 
+corr = hfpy.corr()
+
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+plt.show()
 
 
 
 ##testing for an association: a two sample T-Test
 #one binary categorical variable and one quantitative variable
+#based upon the correlation heatmap depicted in the previous section, it would be worth investigating the association between serum creatinine(quantitative value) and the death event (binary categorical value)
 
+hfpy_DE = hfpy["DEATH_EVENT"]
+print(hfpy_DE)
+# I chose to print the hfpy_DE to make sure that the DEATH_EVENT column was a true binary categorical variable.
 
+from scipy.stats import ttest_ind
 
+#Seperate out data based on whether the death occurred or not
 
+hfpy_no_death = hfpy.serum_creatinine[hfpy.DEATH_EVENT==0]
+hfpy_death = hfpy.serum_creatinine[hfpy.DEATH_EVENT==1]
 
+ttest, pval = ttest_ind(hfpy_no_death,hfpy_death)
+print(pval)
 
+#the pval is much lower than the 0.05 threshold, therefore for the purpose of this demostration I will determine different to be statistically significantly different between death event and no death event for serum creatinine.
 
+plt.hist(hfpy_death, alpha=0.4, label="death occurred")
+plt.hist(hfpy_no_death, alpha=0.8, label="No death occurred")
+plt.legend()
+plt.show()
 
 
 
