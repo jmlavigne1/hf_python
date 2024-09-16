@@ -14,12 +14,22 @@ hfpy = pd.read_csv('heart_failure_clinical_records_dataset.csv')
 print(hfpy)
 
 
-# EDA 
+##EDA 
 
 
 print(hfpy.head())
 
 print(hfpy.dtypes)
+
+print(hfpy.describe())
+
+
+print(hfpy.info())
+#This reveals that there are no missing data in the dataset.
+
+
+
+
 
 # scatterplots of various features
 
@@ -41,6 +51,25 @@ plt.show()
 plt.clf()
 plt.scatter(hfpy.serum_creatinine, hfpy.creatinine_phosphokinase)
 plt.show()
+
+
+##creating scatterplots individually is helpful, however, it is helpful to produce a pair plot to visualize the total dataset
+
+#pair plot for the heart failure dataset
+
+import seaborn as sns
+
+sns.pairplot(hfpy)
+
+
+
+
+
+## a correlation heat map is also a useful tool
+
+#correlation heat map
+
+
 
 
 ##testing for an association: a two sample T-Test
