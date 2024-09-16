@@ -30,7 +30,56 @@ plt.show()
 
 plt.scatter(hfpy.serum_sodium, hfpy.creatinine_phosphokinase)
 plt.show()
+plt.clf()
 
 plt.scatter(hfpy.serum_sodium, hfpy.serum_creatinine)
+plt.show()
+plt.clf()
 
-# chi-squared test to test for association 
+plt.scatter(hfpy.creatinine_phosphokinase, hfpy.serum_creatinine)
+plt.show()
+plt.clf()
+plt.scatter(hfpy.serum_creatinine, hfpy.creatinine_phosphokinase)
+plt.show()
+
+
+##testing for an association: a two sample T-Test
+#one binary categorical variable and one quantitative variable
+
+
+
+
+
+
+
+
+
+
+##testing for an association: ANOVA + Tukey
+#one non-binary categorical variable and one quantitative variable
+
+
+
+
+
+
+
+
+
+
+##testing for an association: chi-squared test
+#two categorical variables
+
+
+
+
+
+
+
+
+
+
+
+
+
+
