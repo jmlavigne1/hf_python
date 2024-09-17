@@ -100,9 +100,24 @@ plt.show()
 
 
 ##testing for an association: ANOVA + Tukey
-#one non-binary categorical variable and one quantitative variable
+#one non-binary categorical variable and one quantitative variable. I will break the age feature up into 3 categories to produce a non-binary category in the dataset.
 
+hfpy_age_min = hfpy['age'].min()
+print(hfpy_age_min)
 
+hfpy_age_max = hfpy['age'].max()
+print(hfpy_age_max)
+
+#Age ranges from 40 yo to 95 yo. Age column will be broken into 40 yo - 56 yo, 57 yo - 73 yo, and 74 yo - 95 yo
+
+age_young = hfpy[hfpy['age'] < 56]
+print(age_young)
+
+age_medium = hfpy[[hfpy['age']>=57  <=73]]
+print(age_medium)
+
+age_old = hfpy[hfpy['age']>=74]
+print(age_old)
 
 
 
