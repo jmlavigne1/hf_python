@@ -134,7 +134,7 @@ f_oneway(age_young, age_med, age_old)
 
 #perform Tukey test to determine which of the three groups 
 
-tukey = pairwise_tukeyhsd(endog=hfpy['age'],groups=[], alpha=0.05)
+tukey = pairwise_tukeyhsd(endog=hfpy['age'],groups=[], alpha=0.05)  
 
 
 
