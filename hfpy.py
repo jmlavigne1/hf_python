@@ -129,11 +129,12 @@ plt.show()
 from scipy.stats import f_oneway
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
-f_statistic, pval = f_oneway(age_young, age_med, age_old)
-print(pval)
+f_oneway(age_young, age_med, age_old)
 
 
+#perform Tukey test to determine which of the three groups 
 
+tukey = pairwise_tukeyhsd(endog=hfpy['age'],groups=[], alpha=0.05)
 
 
 
