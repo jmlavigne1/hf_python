@@ -124,6 +124,17 @@ ax.legend(loc = "upper left")
 ax.get_xaxis().set_visible(False)
 plt.show()
 
+#perform ANOVA with the three age groups and serum creatinine
+
+from scipy.stats import f_oneway
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+
+f_statistic, pval = f_oneway(age_young, age_med, age_old)
+print(pval)
+
+
+
+
 
 
 ##testing for an association: chi-squared test
