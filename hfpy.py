@@ -111,18 +111,18 @@ print(hfpy_age_max)
 #Age ranges from 40 yo to 95 yo. Age column will be broken into 40 yo - 56 yo, 57 yo - 73 yo, and 74 yo - 95 yo
 
 age_young = hfpy[hfpy['age'] < 56]
-print(age_young)
-
-age_medium = hfpy[[hfpy['age']>=57  <=73]]
-print(age_medium)
-
+age_med = hfpy[(hfpy['age']>=57) & (hfpy['age']<=73)]
 age_old = hfpy[hfpy['age']>=74]
-print(age_old)
 
-
-
-
-
+fig, ax = plt.subplots()
+labels = ["Young 45 - 56 years", "Middle 57 - 73 years", "Old 74 - 95 years" ]
+ax.boxplot([age_young['serum_creatinine'],age_med['serum_creatinine'],age_old['serum_creatinine']])
+plt.xlabel('Age Groups')
+plt.ylabel('Serum Creatinine Values')
+plt.title('Age Groups (years) vs. Serum Creatinine')
+ax.legend(loc = "upper left")
+ax.get_xaxis().set_visible(False)
+plt.show()
 
 
 
