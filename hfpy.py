@@ -20,7 +20,6 @@ print(hfpy)
 
 # EDA
 
-
 print(hfpy.head())
 
 print(hfpy.dtypes)
