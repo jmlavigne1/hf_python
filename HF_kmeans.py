@@ -16,10 +16,18 @@ print(hf.head())
 
 print(hf.columns)
 
-x = hf.iloc[:, 4]
-y = hf.iloc[:,-1]
+#calculating the Coefficient of Variance for the following two columns in the hf dataset.
+ss_cp = hf[["serum_sodium", "creatinine_phosphokinase"]]
 
-plt.scatter(x, y, alpha=0.5)
+cv = lambda x: np.std(x, ddof=1)/np.mean(x)*100
+
+print(hf.apply(cv))
+
+
+x = hf.iloc[:, 4]
+y = hf.iloc[:,-6]
+
+plt.scatter(x, y, alpha=0.75)
 plt.show()
 
 
